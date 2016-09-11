@@ -19,5 +19,5 @@ gulp.task('test', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['index.js'], ['test.js']);
+  gulp.watch(['validate_util.js'], ['test.js']);
 });

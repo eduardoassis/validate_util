@@ -1,5 +1,5 @@
 var assert = require('assert');
-var validate_util = require('./index');
+var validate_util = require('./validate_util');
 
 /**
  *  This test suite is meant to be run through gulp (use the `npm run watch`)
