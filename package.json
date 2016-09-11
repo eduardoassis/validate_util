@@ -1,6 +1,6 @@
 {
   "name": "validate_util",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Module to validate string patterns",
   "main": "index.js",
   "scripts": {
