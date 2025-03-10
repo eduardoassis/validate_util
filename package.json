@@ -4,14 +4,10 @@
   "description": "Module to validate string patterns",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test",
-    "watch": "gulp watch"
+    "test": "jest --watchAll"
   },
   "devDependencies": {
-    "gulp": "3.8.11",
-    "gulp-install": "^0.6.0",
-    "gulp-mocha": "2.0.1",
-    "mocha": "2.2.4"
+    "jest": "^29.7.0"
   },
   "repository": {
     "type": "git",

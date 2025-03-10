@@ -1,31 +1,34 @@
-var validate_util = {};
+class ValidateUtil {
+    constructor() {        
+        this._regexValidateEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    }
 
-validate_util = function() {
-	this._regexValidateName = /^(?:(?:[A-ZÁÉÍÓÚÀÂÊÔÃÕÜÇ]{1}[a-záéíóúàâêôãõüç]+))$/;
-	this._regexValidateLastName = /^(?:(?:[A-ZÁÉÍÓÚÀÂÊÔÃÕÜÇ]{1}[a-záéíóúàâêôãõüç]+))$/;
-    this._regexValidateAge = /^\d+$/;
-	this._regexValidateEmail = /^(?:[a-z._]+)@(?:(?:[a-z]+)(?:|\.|))+(?:[a-z]+)$/;
-	this._regexValidateCpf = /^(?:\d{3})(?:|\.|)(?:\d{3})(?:|\.|)(?:\d{3})(?:|-|)(?:\d{2})$/;
-};
+    emailIsValid(value) {
+        return this._regexValidateEmail.test(value);
+    }
 
-validate_util.prototype.firstNameIsValid = function(value) {
-	return this._regexValidateName.exec(value) === null ? false : true;
-};
+    cpfIsValid(value) {
+		const cpf = value.replace(/[^\d]+/g, '');
+        if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+            return false;
+        }
+        let sum = 0;
+        for (let i = 0; i < 9; i++) {
+            sum += parseInt(cpf.charAt(i)) * (10 - i);
+        }
+        let remainder = 11 - (sum % 11);
+        remainder = remainder === 10 || remainder === 11 ? 0 : remainder;
+        if (remainder !== parseInt(cpf.charAt(9))) {
+            return false;
+        }
+        sum = 0;
+        for (let i = 0; i < 10; i++) {
+            sum += parseInt(cpf.charAt(i)) * (11 - i);
+        }
+        remainder = 11 - (sum % 11);
+        remainder = remainder === 10 || remainder === 11 ? 0 : remainder;
+        return remainder === parseInt(cpf.charAt(10));
+    }
+}
 
-validate_util.prototype.lastNameIsValid = function(value) {
-	return this._regexValidateLastName.exec(value) === null ? false : true;
-};
-
-validate_util.prototype.ageIsValid = function(value) {
-   return this._regexValidateAge.exec(value) === null ? false : true;
-};
-
-validate_util.prototype.emailIsValid = function(value) {
-   return this._regexValidateEmail.exec(value) === null ? false : true;
-};
-
-validate_util.prototype.cpfIsValid = function(value) {
-   return this._regexValidateCpf.exec(value) === null ? false : true;
-};
-
-module.exports = validate_util;
+module.exports = ValidateUtil;
